@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script src="arrayMethods.js"></script>
+    <script>
+        // a. Get All the countries from asia continent.
+
+        let request = new XMLHttpRequest();
+        request.open(`GET`,`https://restcountries.com/v3.1/all`);
+        request.send();
+        request.onload = function(){
+            let data = JSON.parse(request.response)
+        
+               let result =  data.filter((element)=>element.region == "Asia")
+                
+               console.log(result)
+            
+        }
+    </script>
+
+    
+    <script>
+        // b. Get all the countries with a population of less than 2 lakhs
+let res = new XMLHttpRequest();
+res.open(`GET`,`https://restcountries.com/v3.1/all`);
+res.send();
+res.onload = function(){
+    let ans = JSON.parse(res.response)
+let ans1 = ans.filter((index)=>index.population < 200000)
+console.log(ans1)
+}
+    </script>
+
+
+    <script>
+        //c. Print the following details name, capital, flag, using forEach method
+        let add =  new XMLHttpRequest();
+        add.open(`GET`,`https://restcountries.com/v3.1/all`);
+        add.send();
+        add.onload = function(){
+            let ans1 = JSON.parse(add.response)
+            let ans2 = ans1.forEach(element => {
+                console.log(element.name.common),
+                console.log(element.capital),
+                console.log(element.flag)
+            });
+             
+            };
+        
+    </script>
+    <script>
+        // population 
+        let url = new XMLHttpRequest();
+        url.open(`GET`,`https://restcountries.com/v3.1/all`);
+        url.send();
+        url.onload = function(){
+            let url1 = JSON.parse(url.response)
+            let url2 = url1.reduce((acc,cur)=>acc+cur.population,0)
+            console.log(`Total population = `+url2)
+        }
+    </script>
+    <script>
+        // e) us dollars
+        let urll = new XMLHttpRequest();
+        urll.open(`GET`,`https://restcountries.com/v3.1/all`);
+        urll.send();
+        urll.onload = function(){
+            let ur = JSON.parse(urll.response);
+            
+            let ans = ur.filter((element)=>{
+                return element.currencies && Object.keys (element.currencies).includes("USD")
+            })
+            ans.forEach((country) => {
+                console.log(country.name.common)
+            });
+            
+            
+        }
+    </script>
+</body>
+</html>
